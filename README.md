@@ -2,6 +2,36 @@
 
 This program takes on the libp2p daemon with gossipsub to create a simple application to send messages to all other peers.
 
+# Introduction
+
+This is a simple tester that runs a gossip implementation, is able to publish messages passed on it to it via a RPC call, and can log received messages to a log file.
+
+## Startup
+
+The program takes a few arguments to start:
+* the destination log file
+* the list of peers to statically connect to
+* The network interface to bind to
+* The port on which it will listen for incoming gossip messages
+* The port on which it will listen for RPC messages
+
+## Execution
+
+The program runs until it is interrupted by a signal from terminal, such as interrupt.
+
+## Publishing messages
+
+The program will publish messages using a POST RPC call under the path `/publish`.
+The program will absorb the payload of the body and post it as is to all other peers.
+
+## Logging messages
+
+Messages are logged using JSON for easy ingestion.
+The format of the JSON object is:
+{"timestamp":<ISO 8601 timestamp>, "value":<payload received>}
+
+This format may evolve over time.
+
 # License
 
 Copyright 2019 Antoine Toulme
